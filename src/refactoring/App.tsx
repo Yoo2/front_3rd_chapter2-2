@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { CartPage } from "./pages/CartPage.tsx";
-import { AdminPage } from "./pages/AdminPage.tsx";
+import { CartPage } from "./pages/cart/CartPage.tsx";
+import { AdminPage } from "./pages/admin/AdminPage.tsx";
 import { useCoupons, useProducts } from "./hooks";
 import { initialCoupons, initialProducts } from "./data.ts";
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Coupon } from "../../types";
+import { Coupon } from "../../../types";
 
-const useAdminNewCoupon = () => {
+export const useNewCoupon = () => {
   const [newCoupon, setNewCoupon] = useState<Coupon>({
     name: "",
     code: "",
@@ -24,5 +24,3 @@ const useAdminNewCoupon = () => {
     handleAddCoupon,
   };
 };
-
-export default useAdminNewCoupon;

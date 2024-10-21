@@ -1,5 +1,5 @@
-import { Product } from "../../../../types";
-import useAdminProduct from "../../../hooks/useAdminProduct";
+import { Product } from "../../../../../../types";
+import { useProduct } from "../../../../../hooks";
 
 interface Props {
   product: Product;
@@ -27,7 +27,7 @@ const ProductComponent = ({
     handleAddDiscount,
     handleEditComplete,
     handleEditProduct,
-  } = useAdminProduct();
+  } = useProduct();
 
   return (
     <div

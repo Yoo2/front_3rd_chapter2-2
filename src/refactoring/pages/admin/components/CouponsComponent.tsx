@@ -1,6 +1,6 @@
-import { Coupon } from "../../../types";
-import useAdminNewCoupon from "../../hooks/useAdminNewCoupon";
-import { formatAdminCoupon } from "../../utils/formatUtils";
+import { Coupon } from "../../../../types";
+import { useNewCoupon } from "../../../hooks";
+import { formatAdminCoupon } from "../../../utils/formatUtils";
 
 interface Props {
   coupons: Coupon[];
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const CouponsComponent = ({ coupons, onCouponAdd }: Props) => {
-  const { newCoupon, setNewCoupon, handleAddCoupon } = useAdminNewCoupon();
+  const { newCoupon, setNewCoupon, handleAddCoupon } = useNewCoupon();
 
   return (
     <div>

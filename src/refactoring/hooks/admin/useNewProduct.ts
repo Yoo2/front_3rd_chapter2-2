@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Product } from "../../types";
+import { Product } from "../../../types";
 
-const useAdminNewProduct = () => {
+export const useNewProduct = () => {
   const [showNewProductForm, setShowNewProductForm] = useState(false);
   const [newProduct, setNewProduct] = useState<Omit<Product, "id">>({
     name: "",
@@ -30,5 +30,3 @@ const useAdminNewProduct = () => {
     handleAddNewProduct,
   };
 };
-
-export default useAdminNewProduct;

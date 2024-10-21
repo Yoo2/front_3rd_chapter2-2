@@ -1,12 +1,12 @@
-import { Coupon, Product } from "../../types.ts";
-import CartItemComponent from "../components/cart-components/CartItemComponent.tsx";
-import ProductComponent from "../components/cart-components/ProductComponent.tsx";
-import { useCart } from "../hooks/index.ts";
+import { Coupon, Product } from "../../../types.ts";
+import CartItemComponent from "./components/CartItemComponent.tsx";
+import ProductComponent from "./components/ProductComponent.tsx";
+import { useCart } from "../../hooks/index.ts";
 import {
   formatCommaWithUnit,
   formatCoupon,
   formatSelectedCoupon,
-} from "../utils/formatUtils.ts";
+} from "../../utils/formatUtils.ts";
 
 interface Props {
   products: Product[];

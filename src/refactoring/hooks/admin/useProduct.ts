@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Discount, Product } from "../../types";
+import { Discount, Product } from "../../../types";
 
-const useAdminProduct = () => {
+export const useProduct = () => {
   const [openProductIds, setOpenProductIds] = useState<Set<string>>(new Set());
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [newDiscount, setNewDiscount] = useState<Discount>({
@@ -115,5 +115,3 @@ const useAdminProduct = () => {
     handleEditProduct,
   };
 };
-
-export default useAdminProduct;
