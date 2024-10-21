@@ -1,6 +1,7 @@
 import { Coupon, Product } from "../../types.ts";
 import ProductComponent from "../components/admin-components/ProductComponent.tsx";
-import useAdmin from "../hooks/useAdmin.ts";
+import useAdminNewCoupon from "../hooks/useAdminNewCoupon.ts";
+import useAdminNewProduct from "../hooks/useAdminNewProduct.ts";
 import { formatAdminCoupon } from "../utils/formatUtils.ts";
 
 interface Props {
@@ -18,16 +19,15 @@ export const AdminPage = ({
   onProductAdd,
   onCouponAdd,
 }: Props) => {
+  const { newCoupon, setNewCoupon, handleAddCoupon } = useAdminNewCoupon();
+
   const {
-    setShowNewProductForm,
     showNewProductForm,
+    setShowNewProductForm,
     newProduct,
     setNewProduct,
     handleAddNewProduct,
-    newCoupon,
-    setNewCoupon,
-    handleAddCoupon,
-  } = useAdmin();
+  } = useAdminNewProduct();
 
   return (
     <div className="container mx-auto p-4">

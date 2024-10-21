@@ -1,13 +1,7 @@
 import { useState } from "react";
-import { Coupon, Product } from "../../types";
+import { Product } from "../../types";
 
-const useAdmin = () => {
-  const [newCoupon, setNewCoupon] = useState<Coupon>({
-    name: "",
-    code: "",
-    discountType: "percentage",
-    discountValue: 0,
-  });
+const useAdminNewProduct = () => {
   const [showNewProductForm, setShowNewProductForm] = useState(false);
   const [newProduct, setNewProduct] = useState<Omit<Product, "id">>({
     name: "",
@@ -15,16 +9,6 @@ const useAdmin = () => {
     stock: 0,
     discounts: [],
   });
-
-  const handleAddCoupon = (onCouponAdd: (newCoupon: Coupon) => void) => {
-    onCouponAdd(newCoupon);
-    setNewCoupon({
-      name: "",
-      code: "",
-      discountType: "percentage",
-      discountValue: 0,
-    });
-  };
 
   const handleAddNewProduct = (onProductAdd: (newProduct: Product) => void) => {
     const productWithId = { ...newProduct, id: Date.now().toString() };
@@ -39,15 +23,12 @@ const useAdmin = () => {
   };
 
   return {
-    setShowNewProductForm,
     showNewProductForm,
+    setShowNewProductForm,
     newProduct,
     setNewProduct,
     handleAddNewProduct,
-    newCoupon,
-    setNewCoupon,
-    handleAddCoupon,
   };
 };
 
-export default useAdmin;
+export default useAdminNewProduct;
