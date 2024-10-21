@@ -1,5 +1,5 @@
-import { Product } from "../../../types";
-import useAdminProduct from "../../hooks/useAdminProduct";
+import { Product } from "../../../../types";
+import useAdminProduct from "../../../hooks/useAdminProduct";
 
 interface Props {
   product: Product;
