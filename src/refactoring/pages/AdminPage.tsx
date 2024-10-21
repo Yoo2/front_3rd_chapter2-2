@@ -1,6 +1,7 @@
 import { Coupon, Product } from "../../types.ts";
 import ProductComponent from "../components/admin-components/ProductComponent.tsx";
 import useAdmin from "../hooks/useAdmin.ts";
+import { formatAdminCoupon } from "../utils/formatUtils.ts";
 
 interface Props {
   products: Product[];
@@ -23,18 +24,6 @@ export const AdminPage = ({
     newProduct,
     setNewProduct,
     handleAddNewProduct,
-    toggleProductAccordion,
-    openProductIds,
-    editingProduct,
-    handleProductNameUpdate,
-    handlePriceUpdate,
-    handleStockUpdate,
-    handleRemoveDiscount,
-    newDiscount,
-    setNewDiscount,
-    handleAddDiscount,
-    handleEditComplete,
-    handleEditProduct,
     newCoupon,
     setNewCoupon,
     handleAddCoupon,
@@ -125,20 +114,8 @@ export const AdminPage = ({
               <ProductComponent
                 product={product}
                 index={index}
-                toggleProductAccordion={toggleProductAccordion}
-                openProductIds={openProductIds}
-                editingProduct={editingProduct}
-                handleProductNameUpdate={handleProductNameUpdate}
-                handlePriceUpdate={handlePriceUpdate}
-                handleStockUpdate={handleStockUpdate}
                 products={products}
                 onProductUpdate={onProductUpdate}
-                handleRemoveDiscount={handleRemoveDiscount}
-                newDiscount={newDiscount}
-                setNewDiscount={setNewDiscount}
-                handleAddDiscount={handleAddDiscount}
-                handleEditComplete={handleEditComplete}
-                handleEditProduct={handleEditProduct}
               />
             ))}
           </div>
@@ -208,11 +185,7 @@ export const AdminPage = ({
                     data-testid={`coupon-${index + 1}`}
                     className="bg-gray-100 p-2 rounded"
                   >
-                    {coupon.name} ({coupon.code}):
-                    {coupon.discountType === "amount"
-                      ? `${coupon.discountValue}원`
-                      : `${coupon.discountValue}%`}{" "}
-                    할인
+                    {formatAdminCoupon(coupon)}
                   </div>
                 ))}
               </div>

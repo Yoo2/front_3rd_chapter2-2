@@ -1,58 +1,34 @@
-import { Discount, Product } from "../../../types";
+import { Product } from "../../../types";
+import useAdminProduct from "../../hooks/useAdminProduct";
 
 interface Props {
   product: Product;
   index: number;
-  toggleProductAccordion: (productId: string) => void;
-  openProductIds: Set<string>;
-  editingProduct: Product | null;
-  handleProductNameUpdate: (productId: string, newName: string) => void;
-  handlePriceUpdate: (productId: string, newPrice: number) => void;
-  handleStockUpdate: (
-    productId: string,
-    newStock: number,
-    products: Product[],
-    onProductUpdate: (updatedProduct: Product) => void
-  ) => void;
   products: Product[];
   onProductUpdate: (updatedProduct: Product) => void;
-  handleRemoveDiscount: (
-    productId: string,
-    index: number,
-    products: Product[],
-    onProductUpdate: (updatedProduct: Product) => void
-  ) => void;
-  newDiscount: Discount;
-  setNewDiscount: React.Dispatch<React.SetStateAction<Discount>>;
-  handleAddDiscount: (
-    productId: string,
-    products: Product[],
-    onProductUpdate: (updatedProduct: Product) => void
-  ) => void;
-  handleEditComplete: (
-    onProductUpdate: (updatedProduct: Product) => void
-  ) => void;
-  handleEditProduct: (product: Product) => void;
 }
 
 const ProductComponent = ({
   product,
   index,
-  toggleProductAccordion,
-  openProductIds,
-  editingProduct,
-  handleProductNameUpdate,
-  handlePriceUpdate,
-  handleStockUpdate,
   products,
   onProductUpdate,
-  handleRemoveDiscount,
-  newDiscount,
-  setNewDiscount,
-  handleAddDiscount,
-  handleEditComplete,
-  handleEditProduct,
 }: Props) => {
+  const {
+    toggleProductAccordion,
+    openProductIds,
+    editingProduct,
+    handleProductNameUpdate,
+    handlePriceUpdate,
+    handleStockUpdate,
+    handleRemoveDiscount,
+    newDiscount,
+    setNewDiscount,
+    handleAddDiscount,
+    handleEditComplete,
+    handleEditProduct,
+  } = useAdminProduct();
+
   return (
     <div
       key={product.id}
