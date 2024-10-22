@@ -90,3 +90,27 @@ export const getRemainingStock = (product: Product, cart: CartItem[]) => {
   const cartItem = cart.find((item) => item.product.id === product.id);
   return product.stock - (cartItem?.quantity || 0);
 };
+
+export const isEmptyStock = (product: Product, cart: CartItem[]) => {
+  const remainingStock = getRemainingStock(product, cart);
+  return remainingStock <= 0;
+};
+
+export const addCartItemToCart = (prevCart: CartItem[], product: Product) => {
+  const existingItem = prevCart.find((item) => item.product.id === product.id);
+  if (existingItem) {
+    return prevCart.map((item) =>
+      item.product.id === product.id
+        ? { ...item, quantity: Math.min(item.quantity + 1, product.stock) }
+        : item
+    );
+  }
+  return [...prevCart, { product, quantity: 1 }];
+};
+
+export const removeCartItemFromCart = (
+  prevCart: CartItem[],
+  productId: string
+) => {
+  return prevCart.filter((item) => item.product.id !== productId);
+};
