@@ -1,5 +1,6 @@
 import { Product } from "../../../../../types";
 import { useNewProduct } from "../../../../hooks";
+import { useNewProductForm } from "../../../../hooks/admin/products/useNewProductForm";
 import ProductComponent from "./components/ProductComponent";
 
 interface Props {
@@ -13,19 +14,15 @@ const ProductsComponent = ({
   onProductUpdate,
   onProductAdd,
 }: Props) => {
-  const {
-    showNewProductForm,
-    setShowNewProductForm,
-    newProduct,
-    setNewProduct,
-    handleAddNewProduct,
-  } = useNewProduct();
+  const { newProduct, addNewProduct, updateNewProductField } = useNewProduct();
+  const { showNewProductForm, toggleNewProductForm, closeNewProductForm } =
+    useNewProductForm();
 
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">상품 관리</h2>
       <button
-        onClick={() => setShowNewProductForm(!showNewProductForm)}
+        onClick={toggleNewProductForm}
         className="bg-green-500 text-white px-4 py-2 rounded mb-4 hover:bg-green-600"
       >
         {showNewProductForm ? "취소" : "새 상품 추가"}
@@ -44,9 +41,7 @@ const ProductsComponent = ({
               id="productName"
               type="text"
               value={newProduct.name}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, name: e.target.value })
-              }
+              onChange={(e) => updateNewProductField("name", e.target.value)}
               className="w-full p-2 border rounded"
             />
           </div>
@@ -62,10 +57,7 @@ const ProductsComponent = ({
               type="number"
               value={newProduct.price}
               onChange={(e) =>
-                setNewProduct({
-                  ...newProduct,
-                  price: parseInt(e.target.value),
-                })
+                updateNewProductField("price", parseInt(e.target.value))
               }
               className="w-full p-2 border rounded"
             />
@@ -82,16 +74,16 @@ const ProductsComponent = ({
               type="number"
               value={newProduct.stock}
               onChange={(e) =>
-                setNewProduct({
-                  ...newProduct,
-                  stock: parseInt(e.target.value),
-                })
+                updateNewProductField("stock", parseInt(e.target.value))
               }
               className="w-full p-2 border rounded"
             />
           </div>
           <button
-            onClick={() => handleAddNewProduct(onProductAdd)}
+            onClick={() => {
+              addNewProduct(onProductAdd);
+              closeNewProductForm();
+            }}
             className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
           >
             추가

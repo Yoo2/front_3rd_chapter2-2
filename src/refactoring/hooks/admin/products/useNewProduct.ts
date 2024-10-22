@@ -1,8 +1,15 @@
 import { useState } from "react";
-import { Product } from "../../../types";
+import { Product } from "../../../../types";
+
+type ProductKey = "name" | "price" | "stock";
+
+interface NewProduct {
+  name: string;
+  price: number;
+  stock: number;
+}
 
 export const useNewProduct = () => {
-  const [showNewProductForm, setShowNewProductForm] = useState(false);
   const [newProduct, setNewProduct] = useState<Omit<Product, "id">>({
     name: "",
     price: 0,
@@ -10,7 +17,7 @@ export const useNewProduct = () => {
     discounts: [],
   });
 
-  const handleAddNewProduct = (onProductAdd: (newProduct: Product) => void) => {
+  const addNewProduct = (onProductAdd: (newProduct: Product) => void) => {
     const productWithId = { ...newProduct, id: Date.now().toString() };
     onProductAdd(productWithId);
     setNewProduct({
@@ -19,14 +26,18 @@ export const useNewProduct = () => {
       stock: 0,
       discounts: [],
     });
-    setShowNewProductForm(false);
+  };
+
+  const updateNewProductField = <K extends ProductKey>(
+    key: K,
+    value: NewProduct[K]
+  ) => {
+    setNewProduct({ ...newProduct, [key]: value });
   };
 
   return {
-    showNewProductForm,
-    setShowNewProductForm,
     newProduct,
-    setNewProduct,
-    handleAddNewProduct,
+    addNewProduct,
+    updateNewProductField,
   };
 };
