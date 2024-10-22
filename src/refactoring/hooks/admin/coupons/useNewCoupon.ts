@@ -3,13 +3,6 @@ import { Coupon } from "../../../../types";
 
 type CouponKey = "name" | "code" | "discountType" | "discountValue";
 
-interface NewCoupon {
-  name: string;
-  code: string;
-  discountType: "amount" | "percentage";
-  discountValue: number;
-}
-
 export const useNewCoupon = () => {
   const [newCoupon, setNewCoupon] = useState<Coupon>({
     name: "",
@@ -29,7 +22,7 @@ export const useNewCoupon = () => {
 
   const updateNewCouponField = <K extends CouponKey>(
     key: K,
-    value: NewCoupon[K]
+    value: Coupon[K]
   ) => {
     setNewCoupon({ ...newCoupon, [key]: value });
   };

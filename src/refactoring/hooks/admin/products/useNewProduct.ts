@@ -3,12 +3,6 @@ import { Product } from "../../../../types";
 
 type ProductKey = "name" | "price" | "stock";
 
-interface NewProduct {
-  name: string;
-  price: number;
-  stock: number;
-}
-
 export const useNewProduct = () => {
   const [newProduct, setNewProduct] = useState<Omit<Product, "id">>({
     name: "",
@@ -30,7 +24,7 @@ export const useNewProduct = () => {
 
   const updateNewProductField = <K extends ProductKey>(
     key: K,
-    value: NewProduct[K]
+    value: Product[K]
   ) => {
     setNewProduct({ ...newProduct, [key]: value });
   };
