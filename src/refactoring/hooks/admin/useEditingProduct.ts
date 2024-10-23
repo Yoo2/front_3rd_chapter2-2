@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Product } from "../../../../types";
-import useNewDiscount from "./hooks/useNewDiscount";
-import { getFoundProduct } from "../../utils/adminUtils";
+import { Product } from "../../../types";
+import { getFoundProduct } from "../utils/adminUtils";
+import useNewDiscount from "./useNewDiscount";
 
 type EditingProductKey = "name" | "price";
 

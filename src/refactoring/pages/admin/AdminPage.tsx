@@ -1,6 +1,6 @@
 import { Coupon, Product } from "../../../types.ts";
 import CouponsComponent from "./components/CouponsComponent.tsx";
-import ProductsComponent from "./components/products/ProductsComponent.tsx";
+import ProductsComponent from "./components/ProductsComponent.tsx";
 
 interface Props {
   products: Product[];

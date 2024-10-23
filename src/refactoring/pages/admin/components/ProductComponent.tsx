@@ -1,5 +1,5 @@
-import { Product } from "../../../../../../types";
-import { useEditingProduct, useProductAccordion } from "../../../../../hooks";
+import { Product } from "../../../../types";
+import { useEditingProduct, useProductAccordion } from "../../../hooks";
 
 interface Props {
   product: Product;
@@ -42,7 +42,7 @@ const ProductComponent = ({
       </button>
       {openProductIds.has(product.id) && (
         <div className="mt-2">
-          {editingProduct && editingProduct.id === product.id ? (
+          {editingProduct?.id === product.id ? (
             <div>
               <div className="mb-4">
                 <label className="block mb-1">상품명: </label>

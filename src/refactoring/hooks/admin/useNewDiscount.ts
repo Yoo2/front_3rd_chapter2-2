@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Discount, Product } from "../../../../../types";
+import { Discount, Product } from "../../../types";
 import {
   addDiscountToProduct,
   getFoundProduct,
   removeDiscountFromProduct,
-} from "../../../utils/adminUtils";
+} from "../utils/adminUtils";
 
 type DiscountKey = "quantity" | "rate";
 const defaultDiscount = () => ({

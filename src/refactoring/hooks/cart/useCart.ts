@@ -8,7 +8,7 @@ import {
   updateCartItemQuantity,
   removeCartItemFromCart,
 } from "../utils/cartUtils";
-import useSelectedCoupon from "./hooks/useSelectedCoupon";
+import useSelectedCoupon from "./useSelectedCoupon";
 
 export const useCart = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
