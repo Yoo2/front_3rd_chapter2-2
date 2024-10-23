@@ -1,4 +1,3 @@
-// useCart.ts
 import { useState } from "react";
 import { CartItem, Product } from "../../../types";
 import {

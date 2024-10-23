@@ -1,4 +1,5 @@
-import { Coupon } from "../../types";
+import { Coupon, Discount } from "../../types";
+import { convertToPercent } from "./calculationUtils";
 
 const formatDiscount = (discountValue: number, discountType: string) => {
   return `${discountValue}${formatDiscountType(discountType)}`;
@@ -19,7 +20,7 @@ export const formatSelectedCoupon = (coupon: Coupon) => {
   return `적용된 쿠폰: ${name}(${formatDiscount(
     discountValue,
     discountType
-  )}} 할인)`;
+  )} 할인)`;
 };
 
 export const formatCommaWithUnit = (amount: number) => {
@@ -32,4 +33,14 @@ export const formatAdminCoupon = (coupon: Coupon) => {
     discountValue,
     discountType
   )} 할인`;
+};
+
+export const formatDiscountInfo = (discount: Discount) => {
+  return `${discount.quantity}개 이상 구매 시 ${convertToPercent(
+    discount.rate
+  )}% 할인`;
+};
+
+export const formatPercent = (value: number) => {
+  return `${convertToPercent(value).toFixed(0)}%`;
 };

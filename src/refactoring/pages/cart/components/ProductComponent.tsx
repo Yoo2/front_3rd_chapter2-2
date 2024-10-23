@@ -3,6 +3,7 @@ import {
   getMaxDiscount,
   getRemainingStock,
 } from "../../../hooks/utils/cartUtils";
+import { formatCommaWithUnit, formatPercent } from "../../../utils/formatUtils";
 
 interface Props {
   product: Product;
@@ -20,7 +21,7 @@ const ProductComponent = ({ product, cart, addToCart }: Props) => {
       <div className="flex justify-between items-center mb-2">
         <span className="font-semibold">{product.name}</span>
         <span className="text-gray-600">
-          {product.price.toLocaleString()}원
+          {formatCommaWithUnit(product.price)}
         </span>
       </div>
       <div className="text-sm text-gray-500 mb-2">
@@ -33,7 +34,7 @@ const ProductComponent = ({ product, cart, addToCart }: Props) => {
         </span>
         {product.discounts.length > 0 && (
           <span className="ml-2 font-medium text-blue-600">
-            최대 {(getMaxDiscount(product.discounts) * 100).toFixed(0)}% 할인
+            {`최대 ${formatPercent(getMaxDiscount(product.discounts))} 할인`}
           </span>
         )}
       </div>
@@ -41,8 +42,9 @@ const ProductComponent = ({ product, cart, addToCart }: Props) => {
         <ul className="list-disc list-inside text-sm text-gray-500 mb-2">
           {product.discounts.map((discount, index) => (
             <li key={index}>
-              {discount.quantity}개 이상: {(discount.rate * 100).toFixed(0)}%
-              할인
+              {`${discount.quantity}개 이상: ${formatPercent(
+                discount.rate
+              )} 할인`}
             </li>
           ))}
         </ul>

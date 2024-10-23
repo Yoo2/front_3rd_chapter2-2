@@ -1,5 +1,6 @@
 import { CartItem } from "../../../../types";
 import { getMaxApplicableDiscount } from "../../../hooks/utils/cartUtils";
+import { formatPercent } from "../../../utils/formatUtils";
 
 interface Props {
   item: CartItem;
@@ -18,7 +19,7 @@ const CartItemComponent = ({ item, updateQuantity, removeFromCart }: Props) => {
           {item.product.price}원 x {item.quantity}
           {appliedDiscount > 0 && (
             <span className="text-green-600 ml-1">
-              ({(appliedDiscount * 100).toFixed(0)}% 할인 적용)
+              {`(${formatPercent(appliedDiscount)} 할인 적용)`}
             </span>
           )}
         </span>
