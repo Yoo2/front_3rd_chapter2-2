@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Coupon } from "../../../../types";
+import { Coupon } from "../../../types";
 
 type CouponKey = "name" | "code" | "discountType" | "discountValue";
 

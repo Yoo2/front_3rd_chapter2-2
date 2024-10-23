@@ -1,6 +1,6 @@
 import { Product } from "../../../../../types";
 import { useNewProduct } from "../../../../hooks";
-import { useNewProductForm } from "../../../../hooks/admin/products/useNewProductForm";
+import { useNewProductForm } from "../../../../hooks/admin/useNewProductForm";
 import ProductComponent from "./components/ProductComponent";
 
 interface Props {
