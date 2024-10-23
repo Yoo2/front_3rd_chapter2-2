@@ -1,5 +1,5 @@
 import { Product } from "../../../../../../types";
-import { useProduct } from "../../../../../hooks";
+import { useEditingProduct, useProductAccordion } from "../../../../../hooks";
 
 interface Props {
   product: Product;
@@ -14,20 +14,19 @@ const ProductComponent = ({
   products,
   onProductUpdate,
 }: Props) => {
+  const { openProductIds, toggleProductAccordion } = useProductAccordion();
   const {
-    toggleProductAccordion,
-    openProductIds,
     editingProduct,
-    handleProductNameUpdate,
-    handlePriceUpdate,
-    handleStockUpdate,
-    handleRemoveDiscount,
+    updateEditingProductName,
+    updateEditingProductPrice,
+    updateProductStock,
+    removeDiscount,
     newDiscount,
-    setNewDiscount,
-    handleAddDiscount,
-    handleEditComplete,
-    handleEditProduct,
-  } = useProduct();
+    addDiscount,
+    updateProduct,
+    updateEditingProduct,
+    updateDiscountField,
+  } = useEditingProduct();
 
   return (
     <div
@@ -52,7 +51,7 @@ const ProductComponent = ({
                   type="text"
                   value={editingProduct.name}
                   onChange={(e) =>
-                    handleProductNameUpdate(product.id, e.target.value)
+                    updateEditingProductName(product.id, e.target.value)
                   }
                   className="w-full p-2 border rounded"
                 />
@@ -63,7 +62,10 @@ const ProductComponent = ({
                   type="number"
                   value={editingProduct.price}
                   onChange={(e) =>
-                    handlePriceUpdate(product.id, parseInt(e.target.value))
+                    updateEditingProductPrice(
+                      product.id,
+                      parseInt(e.target.value)
+                    )
                   }
                   className="w-full p-2 border rounded"
                 />
@@ -74,7 +76,7 @@ const ProductComponent = ({
                   type="number"
                   value={editingProduct.stock}
                   onChange={(e) =>
-                    handleStockUpdate(
+                    updateProductStock(
                       product.id,
                       parseInt(e.target.value),
                       products,
@@ -98,7 +100,7 @@ const ProductComponent = ({
                     </span>
                     <button
                       onClick={() =>
-                        handleRemoveDiscount(
+                        removeDiscount(
                           product.id,
                           index,
                           products,
@@ -117,10 +119,7 @@ const ProductComponent = ({
                     placeholder="수량"
                     value={newDiscount.quantity}
                     onChange={(e) =>
-                      setNewDiscount({
-                        ...newDiscount,
-                        quantity: parseInt(e.target.value),
-                      })
+                      updateDiscountField("quantity", parseInt(e.target.value))
                     }
                     className="w-1/3 p-2 border rounded"
                   />
@@ -129,16 +128,16 @@ const ProductComponent = ({
                     placeholder="할인율 (%)"
                     value={newDiscount.rate * 100}
                     onChange={(e) =>
-                      setNewDiscount({
-                        ...newDiscount,
-                        rate: parseInt(e.target.value) / 100,
-                      })
+                      updateDiscountField(
+                        "rate",
+                        parseInt(e.target.value) / 100
+                      )
                     }
                     className="w-1/3 p-2 border rounded"
                   />
                   <button
                     onClick={() =>
-                      handleAddDiscount(product.id, products, onProductUpdate)
+                      addDiscount(product.id, products, onProductUpdate)
                     }
                     className="w-1/3 bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
                   >
@@ -147,7 +146,7 @@ const ProductComponent = ({
                 </div>
               </div>
               <button
-                onClick={() => handleEditComplete(onProductUpdate)}
+                onClick={() => updateProduct(onProductUpdate)}
                 className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 mt-2"
               >
                 수정 완료
@@ -165,7 +164,7 @@ const ProductComponent = ({
               ))}
               <button
                 data-testid="modify-button"
-                onClick={() => handleEditProduct(product)}
+                onClick={() => updateEditingProduct(product)}
                 className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 mt-2"
               >
                 수정
