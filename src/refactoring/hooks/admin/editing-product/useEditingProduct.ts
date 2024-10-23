@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Product } from "../../../../types";
 import useNewDiscount from "./hooks/useNewDiscount";
+import { getFoundProduct } from "../../utils/adminUtils";
+
+type EditingProductKey = "name" | "price";
 
 export const useEditingProduct = () => {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
@@ -11,18 +14,14 @@ export const useEditingProduct = () => {
     setEditingProduct({ ...product });
   };
 
-  const updateEditingProductName = (productId: string, newName: string) => {
-    if (editingProduct && editingProduct.id === productId) {
-      const updatedProduct = { ...editingProduct, name: newName };
-      setEditingProduct(updatedProduct);
-    }
-  };
-
-  const updateEditingProductPrice = (productId: string, newPrice: number) => {
-    if (editingProduct && editingProduct.id === productId) {
-      const updatedProduct = { ...editingProduct, price: newPrice };
-      setEditingProduct(updatedProduct);
-    }
+  const updateEditingProductField = <K extends EditingProductKey>(
+    productId: string,
+    key: K,
+    value: Product[K]
+  ) => {
+    if (editingProduct?.id !== productId) return;
+    const updatedProduct = { ...editingProduct, [key]: value };
+    setEditingProduct(updatedProduct);
   };
 
   const updateProduct = (
@@ -40,7 +39,7 @@ export const useEditingProduct = () => {
     products: Product[],
     onProductUpdate: (updatedProduct: Product) => void
   ) => {
-    const updatedProduct = products.find((p) => p.id === productId);
+    const updatedProduct = getFoundProduct(productId, products);
     if (updatedProduct) {
       const newProduct = { ...updatedProduct, stock: newStock };
       onProductUpdate(newProduct);
@@ -50,8 +49,7 @@ export const useEditingProduct = () => {
 
   return {
     editingProduct,
-    updateEditingProductName,
-    updateEditingProductPrice,
+    updateEditingProductField,
     updateProductStock,
     removeDiscount,
     newDiscount,

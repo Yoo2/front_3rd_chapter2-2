@@ -17,8 +17,7 @@ const ProductComponent = ({
   const { openProductIds, toggleProductAccordion } = useProductAccordion();
   const {
     editingProduct,
-    updateEditingProductName,
-    updateEditingProductPrice,
+    updateEditingProductField,
     updateProductStock,
     removeDiscount,
     newDiscount,
@@ -51,7 +50,11 @@ const ProductComponent = ({
                   type="text"
                   value={editingProduct.name}
                   onChange={(e) =>
-                    updateEditingProductName(product.id, e.target.value)
+                    updateEditingProductField(
+                      product.id,
+                      "name",
+                      e.target.value
+                    )
                   }
                   className="w-full p-2 border rounded"
                 />
@@ -62,8 +65,9 @@ const ProductComponent = ({
                   type="number"
                   value={editingProduct.price}
                   onChange={(e) =>
-                    updateEditingProductPrice(
+                    updateEditingProductField(
                       product.id,
+                      "price",
                       parseInt(e.target.value)
                     )
                   }
