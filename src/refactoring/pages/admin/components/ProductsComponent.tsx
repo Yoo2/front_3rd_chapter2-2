@@ -93,6 +93,7 @@ const ProductsComponent = ({
       <div className="space-y-2">
         {products.map((product, index) => (
           <ProductComponent
+            key={product.id}
             product={product}
             index={index}
             products={products}

@@ -19,7 +19,6 @@ const ProductComponent = ({
 
   return (
     <div
-      key={product.id}
       data-testid={`product-${index + 1}`}
       className="bg-white p-4 rounded shadow"
     >
